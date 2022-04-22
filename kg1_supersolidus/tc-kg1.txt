@@ -1,0 +1,1490 @@
+% ==================================================================
+% Scriptfile for calcs in KNCFMASTOCr (dry mantle melting)
+% ==================================================================
+
+axfile  KNCFMASTOCr
+
+infolevel 1
+
+
+
+% =======================
+% conditions
+% =======================
+
+setexcess   % list of excess phases
+
+calctatp ask
+
+%setdefTwindow yes  800  1500
+%setdefPwindow yes  0.001 30
+
+setTwindow ask 1300 1300
+setPwindow ask 30 30
+
+
+% ------------------------------------------------
+%  bulk composition: mole% oxides
+%                SiO2   Al2O3   CaO    MgO  FeOt   K2O   Na2O   TiO2     O  Cr2O3
+% ------------------------------------------------
+   setbulk yes  44.41   5.43  7.45  33.23  6.02   0.07  1.39   0.55   0.43   0.06   % KG1
+%           		                    FeO=FeOt-2*O;  Fe2O3=O
+% ------------------------------------------------
+
+
+
+% =======================
+% which calcs
+% =======================
+
+setmodeiso yes
+zeromodeiso yes
+
+%dogmin no  % do G minimisation. CARE!! if bad starting guesses,
+	   % most stable assemblage may not be found.
+seta no
+setiso no
+
+project no
+pseudosection yes
+dogmin no
+
+
+% =======================
+% set up a-x relations
+% =======================
+
+   		      % phases with same a-x relations
+samecoding cpx pig    % clinopyroxene, pigeonite
+samecoding spn cm mt  % Al-spinel, Cr-spinel, magnetite
+
+% --------------------------------------------------------
+% Some sample starting guesses for the compositional
+% variables of phases. After a calc, calculated values of
+% these variables are output to the log file to be
+% copied into this block. More possible starting guesses
+% follow in the storage area at the bottom of this file.
+% N.B. if starting guesses are too far from the true
+%      composition, the equilibrium calc may fail.
+% --------------------------------------------------------
+% at P = 8.3, T = 1190, for: liq plc spn ol opx cpx  with spn = 0
+% --------------------------------------------------------
+ptguess 8.3 1190
+% --------------------------------------------------------
+xyzguess wo(L)         0.290186
+xyzguess sl(L)         0.161782
+xyzguess fo(L)        0.0845999
+xyzguess fa(L)        0.0366545
+xyzguess jd(L)         0.304434
+xyzguess hm(L)        0.0437230
+xyzguess ek(L)      0.000493135
+xyzguess ti(L)        0.0414915
+xyzguess kj(L)        0.0216871
+xyzguess yct(L)       0.0473248
+xyzguess ca(plc)       0.693059
+xyzguess k(plc)      0.00134803
+xyzguess x(sp)         0.168888
+xyzguess y(sp)        0.0524328
+xyzguess c(sp)       0.00720832
+xyzguess t(sp)         0.151334
+xyzguess Q1(sp)        0.423524
+xyzguess Q2(sp)       0.0593089
+xyzguess Q3(sp)       0.0577464
+xyzguess x(ol)         0.123199
+xyzguess c(ol)       0.00516096
+xyzguess Q(ol)      0.000320172
+xyzguess x(opx)        0.119322
+xyzguess y(opx)        0.231873  range  0.000 2.000
+xyzguess c(opx)       0.0831418
+xyzguess Q(opx)      -0.0570180  range -1.000 1.000
+xyzguess f(opx)       0.0501178
+xyzguess t(opx)       0.0215674
+xyzguess cr(opx)      0.0108108
+xyzguess j(opx)      0.00831488
+xyzguess x(cpx)        0.123002
+xyzguess y(cpx)        0.155326  range  0.000 2.000
+xyzguess o(cpx)        0.312585
+xyzguess n(cpx)       0.0795987
+xyzguess Q(cpx)      -0.0375542  range -1.000 1.000
+xyzguess f(cpx)       0.0424316
+xyzguess cr(cpx)     0.00669600
+xyzguess t(cpx)       0.0265263
+xyzguess k(cpx)      0.00281195
+% --------------------------------------------------------
+
+
+% =======================
+% output form/content
+% =======================
+
+%printguessform yes
+%printbulkinfo yes
+printxyz yes
+
+calcsdnle no
+
+%smath no
+%drawpd yes
+%modebox no
+%xinsmath no
+%tabsmath no
+
+%calcsv no
+
+% script block allows liq compositions to be printed in wt%
+%         SiO2 Al2O3   CaO    MgO   FeO   K2O   Na2O   TiO2    O  Cr2O3
+convliq      1     0     0      0     0     0      0      0    0     0     % SiO2
+convliq      0     1     0      0     0     0      0      0    0     0     % Al2O3
+convliq      0     0     1      0     0     0      0      0    0     0     % CaO
+convliq      0     0     0      1     0     0      0      0    0     0     % MgO
+convliq      0     0     0      0     1     0      0      0    0     0     % FeO
+convliq      0     0     0      0     0     1      0      0    0     0     % K2O
+convliq      0     0     0      0     0     0      1      0    0     0     % Na2O
+convliq      0     0     0      0     0     0      0      1    0     0     % TiO2
+convliq      0     0     0      0     2     0      0      0    1     0     % O
+convliq      0     0     0      0     0     0      0      0    0     1     % Cr2O3
+
+
+
+
+
+
+% ==================================================================
+*    STORAGE AREA (nothing read after the asterisk)
+% ==================================================================
+
+Some additional/alternative starting guesses:
+
+% --------------------------------------------------------
+% at P = 4.3, T = 1238, for: liq pl ol cpx  with pl = 0, cpx = 0
+% --------------------------------------------------------
+ptguess 4.3 1238
+% --------------------------------------------------------
+xyzguess wo(L)         0.425270
+xyzguess sl(L)         0.222428
+xyzguess fo(L)         0.111885
+xyzguess fa(L)        0.0486472
+xyzguess jd(L)        0.0882832
+xyzguess hm(L)        0.0217842
+xyzguess ek(L)       0.00114653
+xyzguess ti(L)        0.0108921
+xyzguess kj(L)      0.000573267
+xyzguess yct(L)       0.0459048
+% --------------
+xyzguess ca(pl)        0.811587
+xyzguess k(pl)      0.000136764
+% --------------
+xyzguess x(ol)         0.108935
+xyzguess c(ol)       0.00784399
+xyzguess Q(ol)      0.000422144
+% --------------
+xyzguess x(cpx)       0.0983932
+xyzguess y(cpx)       0.0872592  range  0.000 2.000
+xyzguess o(cpx)        0.234361
+xyzguess n(cpx)       0.0143763
+xyzguess Q(cpx)      -0.0315440  range -1.000 1.000
+xyzguess f(cpx)       0.0177822
+xyzguess cr(cpx)      0.0103230
+xyzguess t(cpx)      0.00359907
+xyzguess k(cpx)      8.04174e-5
+% --------------
+xyzguess x(ilm)        0.907562
+xyzguess Q(ilm)        0.588132  range -0.990 0.990
+% --------------------------------------------------------
+
+
+
+
+% --------------------------------------------------------
+% --- Al-spinel
+xyzguess x(sp)            0.1
+xyzguess y(sp)            0.05
+xyzguess c(sp)            0.05
+xyzguess t(sp)            0.05
+xyzguess Q1(sp)           0.2 range -1 1
+xyzguess Q2(sp)           0.2 range -1 1
+xyzguess Q3(sp)           0.2 range -1 1
+% --- Cr-spinel
+xyzguess x(cm)            0.2
+xyzguess y(cm)            0.1
+xyzguess c(cm)            0.1
+xyzguess t(cm)            0.05
+xyzguess Q1(cm)           0.2 range -1 1
+xyzguess Q2(cm)           0.2 range -1 1
+xyzguess Q3(cm)           0.2 range -1 1
+% --- magnetite
+xyzguess x(mt)            0.6
+xyzguess y(mt)            0.55
+xyzguess c(mt)            0.2
+xyzguess t(mt)            0.01
+xyzguess Q1(mt)           0.33 range -1 1
+xyzguess Q2(mt)           0.14 range -1 1
+xyzguess Q3(mt)           0.25 range -1 1
+% --- garnet
+xyzguess x(g)          0.455851
+xyzguess c(g)          0.286243
+xyzguess f(g)        0.00253871
+xyzguess cr(g)      0.000841005
+xyzguess t(g)         0.0113394
+% --- orthopyroxene
+xyzguess x(opx)        0.103911
+xyzguess y(opx)        0.138434  range  0.000 2.000
+xyzguess c(opx)        0.113787
+xyzguess Q(opx)      -0.0498667  range -1.000 1.000
+xyzguess f(opx)       0.0367792
+xyzguess t(opx)       0.0202266
+xyzguess cr(opx)      0.0328585
+xyzguess j(opx)       0.01
+% --- pigeonite
+xyzguess x(pig)        0.124
+xyzguess y(pig)        0.112  range  0.000 2.000
+xyzguess o(pig)        0.888
+xyzguess n(pig)        0.028
+xyzguess Q(pig)       -0.0115  range -1.000 1.000
+xyzguess f(pig)        0.004
+xyzguess cr(pig)       0.001
+xyzguess t(pig)        0.148
+xyzguess k(pig)        0.001
+% --------------
+xyzguess na(ksp)       0.1
+xyzguess ca(ksp)       0.004
+% --------------------------------------------------------
+
+
+
+% --------------------------------------------------------
+% at P = 11.0, T = 1100, for: ol spn cpx opx
+% --------------------------------------------------------
+ptguess 11.0 1100
+% --------------------------------------------------------
+% --- silicate melt
+xyzguess wo(L)         0.350814
+xyzguess sl(L)         0.138560
+xyzguess fo(L)         0.0705651
+xyzguess fa(L)         0.0734803
+xyzguess jd(L)         0.149634
+xyzguess hm(L)         0.0544048
+xyzguess ek(L)         0.000551565
+xyzguess ti(L)         0.0353660
+xyzguess kj(L)         0.00170849
+xyzguess yct(L)        0.0383637
+% --- plagioclase Ibar1
+xyzguess ca(pl)        0.811587
+xyzguess k(pl)         0.000136764
+% --- olivine
+xyzguess x(ol)           0.1313
+xyzguess c(ol)           0.002704
+xyzguess Q(ol)           0.0001900
+% --- clinopyroxene
+xyzguess x(cpx)          0.1352
+xyzguess y(cpx)          0.08165  range  0.000 2.000
+xyzguess o(cpx)          0.3675
+xyzguess n(cpx)          0.1705
+xyzguess Q(cpx)         -0.03408  range -1.000 1.000
+xyzguess f(cpx)          0.03339
+xyzguess cr(cpx)         0.004008
+xyzguess t(cpx)          0.03001
+xyzguess k(cpx)          0.008812
+% --- Al-spinel
+xyzguess x(sp)            0.1803
+xyzguess y(sp)            0.02635
+xyzguess c(sp)            0.004206
+xyzguess t(sp)            0.01196
+xyzguess Q1(sp)           0.4611  range -1 1
+xyzguess Q2(sp)           0.08400  range -1 1
+xyzguess Q3(sp)           0.03389  range -1 1
+% --- garnet
+xyzguess x(g)          0.455851
+xyzguess c(g)          0.286243
+xyzguess f(g)        0.00253871
+xyzguess cr(g)      0.000841005
+xyzguess t(g)         0.0113394
+% --- orthopyroxene
+xyzguess x(opx)        0.1225
+xyzguess y(opx)        0.1888  range  0.000 2.000
+xyzguess c(opx)        0.04398
+xyzguess Q(opx)      -0.06011  range -1.000 1.000
+xyzguess f(opx)       0.03488
+xyzguess t(opx)       0.007523
+xyzguess cr(opx)      0.006180
+xyzguess j(opx)       0.01295
+% --------------------------------------------------------
+
+
+% --------------------------------------------------------
+% at P = 18.5, T = 1241, for: spn g ol cpx - opx
+% --------------------------------------------------------
+ptguess 18.5113 1241.000
+% --------------------------------------------------------
+% --- silicate melt
+xyzguess wo(L)         0.350814
+xyzguess sl(L)         0.138560
+xyzguess fo(L)         0.0705651
+xyzguess fa(L)         0.0734803
+xyzguess jd(L)         0.149634
+xyzguess hm(L)         0.0544048
+xyzguess ek(L)         0.000551565
+xyzguess ti(L)         0.0353660
+xyzguess kj(L)         0.00170849
+xyzguess yct(L)        0.0383637
+% --- plagioclase Ibar1
+xyzguess ca(pl)        0.811587
+xyzguess k(pl)         0.000136764
+% --- olivine
+xyzguess x(ol)           0.1297
+xyzguess c(ol)           0.003842
+xyzguess Q(ol)           0.0002400
+% --- clinopyroxene
+xyzguess x(cpx)          0.1305
+xyzguess y(cpx)          0.1217  range  0.000 2.000
+xyzguess o(cpx)          0.5059
+xyzguess n(cpx)          0.1344
+xyzguess Q(cpx)         -0.03123  range -1.000 1.000
+xyzguess f(cpx)          0.03217
+xyzguess cr(cpx)         0.004185
+xyzguess t(cpx)          0.02568
+xyzguess k(cpx)          0.006770
+% --- Al-spinel
+xyzguess x(sp)            0.1817
+xyzguess y(sp)            0.04252
+xyzguess c(sp)            0.006514
+xyzguess t(sp)            0.006029
+xyzguess Q1(sp)           0.4163  range -1 1
+xyzguess Q2(sp)           0.07916  range -1 1
+xyzguess Q3(sp)           0.04783  range -1 1
+% --- garnet
+xyzguess x(g)          0.1855
+xyzguess c(g)          0.1347
+xyzguess f(g)        0.02013
+xyzguess cr(g)      0.007958
+xyzguess t(g)         0.008863
+% --- orthopyroxene
+xyzguess x(opx)        0.1164
+xyzguess y(opx)        0.2018  range  0.000 2.000
+xyzguess c(opx)        0.06107
+xyzguess Q(opx)      -0.05351  range -1.000 1.000
+xyzguess f(opx)       0.05019
+xyzguess t(opx)       0.005154
+xyzguess cr(opx)      0.006748
+xyzguess j(opx)       0.01721
+% --------------------------------------------------------
+
+
+% --------------------------------------------------------
+% at P = 16.8555, T = 1470.000, for: spn cpx ol liq - opx
+% --------------------------------------------------------
+ptguess 16.8555 1470.000
+% --------------------------------------------------------
+% --- silicate melt
+xyzguess wo(L)            0.34193
+xyzguess sl(L)            0.16504
+xyzguess fo(L)            0.16672
+xyzguess fa(L)            0.05944
+xyzguess jd(L)            0.17651
+xyzguess hm(L)            0.05087
+xyzguess ek(L)            0.00123
+xyzguess ti(L)            0.02336
+xyzguess kj(L)            0.01330
+xyzguess yct(L)           0.01411
+xyzguess x(sp)            0.13330
+xyzguess y(sp)            0.04347
+xyzguess c(sp)            0.01976
+xyzguess t(sp)            0.00489
+xyzguess Q1(sp)           0.38997
+xyzguess Q2(sp)           0.06702
+xyzguess Q3(sp)           0.05386
+xyzguess x(ol)            0.09977
+xyzguess c(ol)            0.00658
+xyzguess Q(ol)            0.00028
+xyzguess x(opx)           0.08657
+xyzguess y(opx)           0.22544
+xyzguess c(opx)           0.08868
+xyzguess Q(opx)          -0.03665
+xyzguess f(opx)           0.05578
+xyzguess t(opx)           0.00489
+xyzguess cr(opx)          0.01147
+xyzguess j(opx)           0.01685
+xyzguess x(cpx)           0.09547
+xyzguess y(cpx)           0.19477
+xyzguess o(cpx)           0.65378
+xyzguess n(cpx)           0.07161
+xyzguess Q(cpx)          -0.02115
+xyzguess f(cpx)           0.02450
+xyzguess cr(cpx)          0.00715
+xyzguess t(cpx)           0.02155
+xyzguess k(cpx)           0.00079
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 18.459, T = 1250.000, for: spn cpx ol - opx
+% --------------------------------------------------------
+ptguess 18.459 1250.000
+% --------------------------------------------------------
+xyzguess x(sp)            0.18310
+xyzguess y(sp)            0.04150
+xyzguess c(sp)            0.00654
+xyzguess t(sp)            0.00560
+xyzguess Q1(sp)           0.41531
+xyzguess Q2(sp)           0.07997
+xyzguess Q3(sp)           0.04719
+xyzguess x(ol)            0.13069
+xyzguess c(ol)            0.00401
+xyzguess Q(ol)            0.00025
+xyzguess x(opx)           0.11731
+xyzguess y(opx)           0.20312
+xyzguess c(opx)           0.06225
+xyzguess Q(opx)          -0.05368
+xyzguess f(opx)           0.05002
+xyzguess t(opx)           0.00505
+xyzguess cr(opx)          0.00681
+xyzguess j(opx)           0.01711
+xyzguess x(cpx)           0.13139
+xyzguess y(cpx)           0.12465
+xyzguess o(cpx)           0.51511
+xyzguess n(cpx)           0.13021
+xyzguess Q(cpx)          -0.03143
+xyzguess f(cpx)           0.03126
+xyzguess cr(cpx)          0.00418
+xyzguess t(cpx)           0.02515
+xyzguess k(cpx)           0.00656
+% --------------------------------------------------------
+
+
+% --------------------------------------------------------
+% at P = 37.5, T = 1608.697, for: liq cpx ol - opx
+% --------------------------------------------------------
+ptguess 37.5 1608.697
+% --------------------------------------------------------
+xyzguess wo(L)            0.34153
+xyzguess sl(L)            0.15034
+xyzguess fo(L)            0.24062
+xyzguess fa(L)            0.06131
+xyzguess jd(L)            0.12523
+xyzguess hm(L)            0.04327
+xyzguess ek(L)            0.00203
+xyzguess ti(L)            0.02313
+xyzguess kj(L)            0.00864
+xyzguess yct(L)           0.00615
+xyzguess x(ol)            0.07704
+xyzguess c(ol)            0.00591
+xyzguess Q(ol)            0.00019
+xyzguess x(opx)           0.06081
+xyzguess y(opx)           0.16971
+xyzguess c(opx)           0.06931
+xyzguess Q(opx)          -0.02401
+xyzguess f(opx)           0.04229
+xyzguess t(opx)           0.00222
+xyzguess cr(opx)          0.01127
+xyzguess j(opx)           0.02188
+xyzguess x(cpx)           0.06713
+xyzguess y(cpx)           0.15766
+xyzguess o(cpx)           0.76296
+xyzguess n(cpx)           0.06642
+xyzguess Q(cpx)          -0.01098
+xyzguess f(cpx)           0.01473
+xyzguess cr(cpx)          0.00720
+xyzguess t(cpx)           0.01525
+xyzguess k(cpx)           0.00035
+xyzguess x(sp)            0.18310
+xyzguess y(sp)            0.04150
+xyzguess c(sp)            0.00654
+xyzguess t(sp)            0.00560
+xyzguess Q1(sp)           0.41531
+xyzguess Q2(sp)           0.07997
+xyzguess Q3(sp)           0.04719
+% --------------------------------------------------------
+
+
+% --------------------------------------------------------
+% at P = 21.9476, T = 1360.387, for: spn cpx ol - liq g
+% --------------------------------------------------------
+ptguess 21.9476 1360.387
+% --------------------------------------------------------
+xyzguess wo(L)            0.28009
+xyzguess sl(L)            0.12594
+xyzguess fo(L)            0.11126
+xyzguess fa(L)            0.05293
+xyzguess jd(L)            0.28413
+xyzguess hm(L)            0.04072
+xyzguess ek(L)            0.00044
+xyzguess ti(L)            0.02274
+xyzguess kj(L)            0.08064
+xyzguess yct(L)           0.01582
+xyzguess x(sp)            0.18716
+xyzguess y(sp)            0.03803
+xyzguess c(sp)            0.00522
+xyzguess t(sp)            0.00824
+xyzguess Q1(sp)           0.39819
+xyzguess Q2(sp)           0.08223
+xyzguess Q3(sp)           0.04573
+xyzguess x(g)             0.18171
+xyzguess c(g)             0.14070
+xyzguess f(g)             0.02123
+xyzguess cr(g)            0.00882
+xyzguess t(g)             0.01177
+xyzguess x(ol)            0.13356
+xyzguess c(ol)            0.00561
+xyzguess Q(ol)            0.00033
+xyzguess x(cpx)           0.13108
+xyzguess y(cpx)           0.14878
+xyzguess o(cpx)           0.51557
+xyzguess n(cpx)           0.13021
+xyzguess Q(cpx)          -0.02947
+xyzguess f(cpx)           0.03384
+xyzguess cr(cpx)          0.00472
+xyzguess t(cpx)           0.02505
+xyzguess k(cpx)           0.00656
+% --------------------------------------------------------
+
+
+% --------------------------------------------------------
+% at P = 15.6083, T = 980.0, for: g opx cpx ol - spn
+% --------------------------------------------------------
+ptguess 15.6063 980.0
+% --------------------------------------------------------
+xyzguess x(sp)            0.15973
+xyzguess y(sp)            0.06416
+xyzguess c(sp)            0.00654
+xyzguess t(sp)            0.10996
+xyzguess Q1(sp)           0.45872
+xyzguess Q2(sp)           0.05368
+xyzguess Q3(sp)           0.06194
+xyzguess x(g)             0.19078
+xyzguess c(g)             0.11626
+xyzguess f(g)             0.01457
+xyzguess cr(g)            0.00527
+xyzguess t(g)             0.00827
+xyzguess x(ol)            0.11227
+xyzguess c(ol)            0.00108
+xyzguess Q(ol)            0.00007
+xyzguess x(opx)           0.10226
+xyzguess y(opx)           0.16363
+xyzguess c(opx)           0.03149
+xyzguess Q(opx)          -0.05437
+xyzguess f(opx)           0.03830
+xyzguess t(opx)           0.01033
+xyzguess cr(opx)          0.00686
+xyzguess j(opx)           0.01240
+xyzguess x(cpx)           0.11125
+xyzguess y(cpx)           0.04441
+xyzguess o(cpx)           0.23235
+xyzguess n(cpx)           0.24082
+xyzguess Q(cpx)          -0.02449
+xyzguess f(cpx)           0.05972
+xyzguess cr(cpx)          0.00574
+xyzguess t(cpx)           0.04057
+xyzguess k(cpx)           0.01220
+% --------------------------------------------------------
+
+
+% --------------------------------------------------------
+% at P = 15.6083, T = 980.0, for: g opx cpx ol - spn
+% --------------------------------------------------------
+ptguess 15.6063 980.0
+% --------------------------------------------------------
+xyzguess x(sp)            0.15973
+xyzguess y(sp)            0.06416
+xyzguess c(sp)            0.00654
+xyzguess t(sp)            0.10996
+xyzguess Q1(sp)           0.45872
+xyzguess Q2(sp)           0.05368
+xyzguess Q3(sp)           0.06194
+xyzguess x(g)             0.19078
+xyzguess c(g)             0.11626
+xyzguess f(g)             0.01457
+xyzguess cr(g)            0.00527
+xyzguess t(g)             0.00827
+xyzguess x(ol)            0.11227
+xyzguess c(ol)            0.00108
+xyzguess Q(ol)            0.00007
+xyzguess x(opx)           0.10226
+xyzguess y(opx)           0.16363
+xyzguess c(opx)           0.03149
+xyzguess Q(opx)          -0.05437
+xyzguess f(opx)           0.03830
+xyzguess t(opx)           0.01033
+xyzguess cr(opx)          0.00686
+xyzguess j(opx)           0.01240
+xyzguess x(cpx)           0.11125
+xyzguess y(cpx)           0.04441
+xyzguess o(cpx)           0.23235
+xyzguess n(cpx)           0.24082
+xyzguess Q(cpx)          -0.02449
+xyzguess f(cpx)           0.05972
+xyzguess cr(cpx)          0.00574
+xyzguess t(cpx)           0.04057
+xyzguess k(cpx)           0.01220
+% --------------------------------------------------------
+
+
+% --------------------------------------------------------
+% at P = 21.3298, T = 1410.000, for: liq spn ol cpx - g
+% --------------------------------------------------------
+ptguess 21.3298 1410.000
+% --------------------------------------------------------
+xyzguess wo(L)            0.34230
+xyzguess sl(L)            0.17689
+xyzguess fo(L)            0.14587
+xyzguess fa(L)            0.05358
+xyzguess jd(L)            0.19336
+xyzguess hm(L)            0.05050
+xyzguess ek(L)            0.00118
+xyzguess ti(L)            0.02012
+xyzguess kj(L)            0.01289
+xyzguess yct(L)           0.01947
+xyzguess x(sp)            0.13376
+xyzguess y(sp)            0.04233
+xyzguess c(sp)            0.02170
+xyzguess t(sp)            0.00503
+xyzguess Q1(sp)           0.40150
+xyzguess Q2(sp)           0.06736
+xyzguess Q3(sp)           0.05258
+xyzguess x(g)             0.13644
+xyzguess c(g)             0.14260
+xyzguess f(g)             0.02312
+xyzguess cr(g)            0.01993
+xyzguess t(g)             0.01150
+xyzguess x(ol)            0.10039
+xyzguess c(ol)            0.00648
+xyzguess Q(ol)            0.00029
+xyzguess x(cpx)           0.09932
+xyzguess y(cpx)           0.19116
+xyzguess o(cpx)           0.66194
+xyzguess n(cpx)           0.05971
+xyzguess Q(cpx)          -0.02349
+xyzguess f(cpx)           0.02465
+xyzguess cr(cpx)          0.00737
+xyzguess t(cpx)           0.02414
+xyzguess k(cpx)           0.00086
+xyzguess x(opx)           0.10226
+xyzguess y(opx)           0.16363
+xyzguess c(opx)           0.03149
+xyzguess Q(opx)          -0.05437
+xyzguess f(opx)           0.03830
+xyzguess t(opx)           0.01033
+xyzguess cr(opx)          0.00686
+xyzguess j(opx)           0.01240
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 21.3298, T = 1410.000, for: liq spn ol cpx - g
+% --------------------------------------------------------
+ptguess 21.3298 1410.000
+% --------------------------------------------------------
+xyzguess wo(L)            0.32590
+xyzguess sl(L)            0.15942
+xyzguess fo(L)            0.13504
+xyzguess fa(L)            0.05504
+xyzguess jd(L)            0.22792
+xyzguess hm(L)            0.05219
+xyzguess ek(L)            0.00081
+xyzguess ti(L)            0.02267
+xyzguess kj(L)            0.01882
+xyzguess yct(L)           0.01827
+xyzguess x(sp)            0.15138
+xyzguess y(sp)            0.04583
+xyzguess c(sp)            0.01209
+xyzguess t(sp)            0.00725
+xyzguess Q1(sp)           0.39332
+xyzguess Q2(sp)           0.07068
+xyzguess Q3(sp)           0.05379
+xyzguess x(g)             0.15263
+xyzguess c(g)             0.14685
+xyzguess f(g)             0.02543
+xyzguess cr(g)            0.01442
+xyzguess t(g)             0.01235
+xyzguess x(ol)            0.11185
+xyzguess c(ol)            0.00633
+xyzguess Q(ol)            0.00031
+xyzguess x(opx)           0.09984
+xyzguess y(opx)           0.22573
+xyzguess c(opx)           0.08719
+xyzguess Q(opx)          -0.04338
+xyzguess f(opx)           0.05899
+xyzguess t(opx)           0.00620
+xyzguess cr(opx)          0.00949
+xyzguess j(opx)           0.01607
+xyzguess x(cpx)           0.11048
+xyzguess y(cpx)           0.17934
+xyzguess o(cpx)           0.59500
+xyzguess n(cpx)           0.08319
+xyzguess Q(cpx)          -0.02657
+xyzguess f(cpx)           0.02928
+xyzguess cr(cpx)          0.00579
+xyzguess t(cpx)           0.02431
+xyzguess k(cpx)           0.00138
+% --------------------------------------------------------
+
+
+% --------------------------------------------------------
+% at P = 10.6, T = 1162.992, for: pl spn ol opx cpx - liq
+% --------------------------------------------------------
+ptguess 10.6 1162.992
+% --------------------------------------------------------
+xyzguess wo(L)            0.20919
+xyzguess sl(L)            0.10290
+xyzguess fo(L)            0.06317
+xyzguess fa(L)            0.02649
+xyzguess jd(L)            0.47274
+xyzguess hm(L)            0.02951
+xyzguess ek(L)            0.00025
+xyzguess ti(L)            0.01325
+xyzguess kj(L)            0.06974
+xyzguess yct(L)           0.03133
+xyzguess ca(pl)           0.23517
+xyzguess k(pl)            0.01322
+xyzguess x(sp)            0.17624
+xyzguess y(sp)            0.02974
+xyzguess c(sp)            0.00486
+xyzguess t(sp)            0.00765
+xyzguess Q1(sp)           0.44509
+xyzguess Q2(sp)           0.08194
+xyzguess Q3(sp)           0.03757
+xyzguess x(ol)            0.12930
+xyzguess c(ol)            0.00370
+xyzguess Q(ol)            0.00024
+xyzguess x(opx)           0.12109
+xyzguess y(opx)           0.20166
+xyzguess c(opx)           0.05175
+xyzguess Q(opx)          -0.05742
+xyzguess f(opx)           0.04172
+xyzguess t(opx)           0.00658
+xyzguess cr(opx)          0.00688
+xyzguess j(opx)           0.01397
+xyzguess x(cpx)           0.13502
+xyzguess y(cpx)           0.10244
+xyzguess o(cpx)           0.43946
+xyzguess n(cpx)           0.14788
+xyzguess Q(cpx)          -0.03394
+xyzguess f(cpx)           0.03236
+xyzguess cr(cpx)          0.00411
+xyzguess t(cpx)           0.02851
+xyzguess k(cpx)           0.00774
+% --------------------------------------------------------
+
+
+% --------------------------------------------------------
+ptguess 2.8471 1225.341
+% --------------------------------------------------------
+xyzguess wo(L)            0.41449
+xyzguess sl(L)            0.21184
+xyzguess fo(L)            0.11038
+xyzguess fa(L)            0.03753
+xyzguess jd(L)            0.09377
+xyzguess hm(L)            0.02022
+xyzguess ek(L)            0.00354
+xyzguess ti(L)            0.00972
+xyzguess kj(L)            0.00380
+xyzguess yct(L)           0.04649
+xyzguess ca(pl)           0.92369
+xyzguess k(pl)            0.00021
+xyzguess x(ol)            0.08657
+xyzguess c(ol)            0.00735
+xyzguess Q(ol)            0.00033
+xyzguess x(opx)           0.08368
+xyzguess y(opx)           0.13416
+xyzguess c(opx)           0.11273
+xyzguess Q(opx)          -0.03978
+xyzguess f(opx)           0.01757
+xyzguess t(opx)           0.00451
+xyzguess cr(opx)          0.04804
+xyzguess j(opx)           0.00164
+xyzguess x(cpx)           0.07915
+xyzguess y(cpx)           0.08787
+xyzguess o(cpx)           0.21772
+xyzguess n(cpx)           0.01477
+xyzguess Q(cpx)          -0.02580
+xyzguess f(cpx)           0.01481
+xyzguess cr(cpx)          0.02826
+xyzguess t(cpx)           0.00248
+xyzguess k(cpx)           0.00059
+xyzguess x(sp)            0.45122
+xyzguess y(sp)            0.61503
+xyzguess c(sp)            0.61627
+xyzguess t(sp)            0.00500
+xyzguess Q1(sp)           0.34364
+xyzguess Q2(sp)           0.00703
+xyzguess Q3(sp)           0.36418
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 9.6, T = 1251, for: liq spn ol opx cpx -pl
+% --------------------------------------------------------
+ptguess 18.5113 1241.000
+% --------------------------------------------------------
+% --- silicate melt
+xyzguess wo(L)         0.3444
+xyzguess sl(L)         0.2094
+xyzguess fo(L)         0.1072
+xyzguess fa(L)         0.04035
+xyzguess jd(L)         0.2024
+xyzguess hm(L)         0.05239
+xyzguess ek(L)         0.001386
+xyzguess ti(L)         0.01291
+xyzguess kj(L)         0.01107
+xyzguess yct(L)        0.04585
+% --- plagioclase Ibar1
+xyzguess ca(pl)        0.811587
+xyzguess k(pl)         0.000136764
+% --- olivine
+xyzguess x(ol)           0.1010
+xyzguess c(ol)           0.005914
+xyzguess Q(ol)           0.0002939
+% --- clinopyroxene
+xyzguess x(cpx)          0.1064
+xyzguess y(cpx)          0.1769  range  0.000 2.000
+xyzguess o(cpx)          0.6793
+xyzguess n(cpx)          0.03724
+xyzguess Q(cpx)         -0.02834  range -1.000 1.000
+xyzguess f(cpx)          0.02121
+xyzguess cr(cpx)         0.008500
+xyzguess t(cpx)          0.03264
+xyzguess k(cpx)          0.0009950
+% --- Al-spinel
+xyzguess x(sp)            0.1412
+xyzguess y(sp)            0.04719
+xyzguess c(sp)            0.05422
+xyzguess t(sp)            0.004379
+xyzguess Q1(sp)           0.4353  range -1 1
+xyzguess Q2(sp)           0.06997  range -1 1
+xyzguess Q3(sp)           0.05625  range -1 1
+% --- garnet
+xyzguess x(g)          0.1855
+xyzguess c(g)          0.1347
+xyzguess f(g)        0.02013
+xyzguess cr(g)      0.007958
+xyzguess t(g)         0.008863
+% --- orthopyroxene
+xyzguess x(opx)        0.1107
+xyzguess y(opx)        0.2276  range  0.000 2.000
+xyzguess c(opx)        0.07983
+xyzguess Q(opx)      -0.05242 range -1.000 1.000
+xyzguess f(opx)       0.04157
+xyzguess t(opx)       0.01825
+xyzguess cr(opx)      0.01005
+xyzguess j(opx)       0.006143
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 8.6, T = 1157.140, for: pl spn ol opx cpx - liq
+% --------------------------------------------------------
+ptguess 8.6 1157.140
+% --------------------------------------------------------
+xyzguess wo(L)            0.23912
+xyzguess sl(L)            0.12602
+xyzguess fo(L)            0.06921
+xyzguess fa(L)            0.03086
+xyzguess jd(L)            0.36582
+xyzguess hm(L)            0.04562
+xyzguess ek(L)            0.00038
+xyzguess ti(L)            0.03490
+xyzguess kj(L)            0.07327
+xyzguess yct(L)           0.04128
+xyzguess ca(pl)           0.49977
+xyzguess k(pl)            0.00905
+xyzguess x(sp)            0.18726
+xyzguess y(sp)            0.05930
+xyzguess c(sp)            0.00787
+xyzguess t(sp)            0.09750
+xyzguess Q1(sp)           0.42030
+xyzguess Q2(sp)           0.06549
+xyzguess Q3(sp)           0.05966
+xyzguess x(ol)            0.13298
+xyzguess c(ol)            0.00424
+xyzguess Q(ol)            0.00029
+xyzguess x(opx)           0.12774
+xyzguess y(opx)           0.22638
+xyzguess c(opx)           0.06965
+xyzguess Q(opx)          -0.06148
+xyzguess f(opx)           0.05668
+xyzguess t(opx)           0.01739
+xyzguess cr(opx)          0.00969
+xyzguess j(opx)           0.01074
+xyzguess x(cpx)           0.13571
+xyzguess y(cpx)           0.13636
+xyzguess o(cpx)           0.36267
+xyzguess n(cpx)           0.11284
+xyzguess Q(cpx)          -0.03778
+xyzguess f(cpx)           0.04667
+xyzguess cr(cpx)          0.00571
+xyzguess t(cpx)           0.03468
+xyzguess k(cpx)           0.01035
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 11.0, T = 900, for: spn ol opx cpx
+% --------------------------------------------------------
+ptguess 11.0 900
+% --------------------------------------------------------
+xyzguess x(sp)         0.191115
+xyzguess y(sp)        0.0216142
+xyzguess c(sp)       0.00354427
+xyzguess t(sp)        0.0353121
+xyzguess Q1(sp)        0.512775
+xyzguess Q2(sp)       0.0865389
+xyzguess Q3(sp)       0.0272632
+xyzguess x(ol)         0.136096
+xyzguess c(ol)      0.000872519
+xyzguess Q(ol)       7.53285e-5
+xyzguess x(opx)        0.126734
+xyzguess y(opx)        0.148862  range  0.000 2.000
+xyzguess c(opx)       0.0250535
+xyzguess Q(opx)      -0.0702578  range -1.000 1.000
+xyzguess f(opx)       0.0216873
+xyzguess t(opx)      0.00873373
+xyzguess cr(opx)     0.00505077
+xyzguess j(opx)      0.00880906
+xyzguess x(cpx)        0.127571
+xyzguess y(cpx)       0.0260883  range  0.000 2.000
+xyzguess o(cpx)        0.172442
+xyzguess n(cpx)        0.222121
+xyzguess Q(cpx)      -0.0287355  range -1.000 1.000
+xyzguess f(cpx)       0.0429932
+xyzguess cr(cpx)     0.00411311
+xyzguess t(cpx)       0.0289933
+xyzguess k(cpx)       0.0115218
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 23.0, T = 912, for: g ol opx cpx ilm  with ilm = 0
+% --------------------------------------------------------
+ptguess 23.0 912
+% --------------------------------------------------------
+xyzguess x(g)          0.196972
+xyzguess c(g)          0.101348
+xyzguess f(g)         0.0154086
+xyzguess cr(g)       0.00565331
+xyzguess t(g)        0.00925866
+xyzguess x(ol)         0.106209
+xyzguess c(ol)      0.000484680
+xyzguess Q(ol)       3.33440e-5
+xyzguess x(opx)       0.0881186
+xyzguess y(opx)       0.0674434  range  0.000 2.000
+xyzguess c(opx)       0.0216326
+xyzguess Q(opx)      -0.0488246  range -1.000 1.000
+xyzguess f(opx)       0.0213752
+xyzguess t(opx)      0.00391957
+xyzguess cr(opx)     0.00380080
+xyzguess j(opx)       0.0132409
+xyzguess x(cpx)       0.0974063
+xyzguess y(cpx)      0.00253998  range  0.000 2.000
+xyzguess o(cpx)        0.177313
+xyzguess n(cpx)        0.257775
+xyzguess Q(cpx)      -0.0207806  range -1.000 1.000
+xyzguess f(cpx)       0.0644121
+xyzguess cr(cpx)     0.00571545
+xyzguess t(cpx)       0.0424096
+xyzguess k(cpx)       0.0130272
+xyzguess x(ilm)        0.857637
+xyzguess Q(ilm)        0.678506  range -0.990 0.990
+xyzguess x(sp)         0.191115
+xyzguess y(sp)        0.0216142
+xyzguess c(sp)       0.00354427
+xyzguess t(sp)        0.0353121
+xyzguess Q1(sp)        0.512775
+xyzguess Q2(sp)       0.0865389
+xyzguess Q3(sp)       0.0272632
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 14.7, T = 900, for: spn g ol opx cpx ilm  with spn = 0
+% --------------------------------------------------------
+ptguess 14.7 900
+% --------------------------------------------------------
+xyzguess x(sp)         0.152269
+xyzguess y(sp)        0.0538416
+xyzguess c(sp)       0.00684440
+xyzguess t(sp)         0.114702
+xyzguess Q1(sp)        0.491213
+xyzguess Q2(sp)       0.0534032
+xyzguess Q3(sp)       0.0547449
+xyzguess x(g)          0.195029
+xyzguess c(g)          0.107439
+xyzguess f(g)         0.0102826
+xyzguess cr(g)       0.00436246
+xyzguess t(g)        0.00619501
+xyzguess x(ol)         0.107791
+xyzguess c(ol)      0.000666862
+xyzguess Q(ol)       4.69971e-5
+xyzguess x(opx)       0.0987356
+xyzguess y(opx)        0.145686  range  0.000 2.000
+xyzguess c(opx)       0.0237409
+xyzguess Q(opx)      -0.0551473  range -1.000 1.000
+xyzguess f(opx)       0.0302347
+xyzguess t(opx)      0.00926628
+xyzguess cr(opx)     0.00698909
+xyzguess j(opx)       0.0101492
+xyzguess x(cpx)        0.104060
+xyzguess y(cpx)       0.0250475  range  0.000 2.000
+xyzguess o(cpx)        0.165768
+xyzguess n(cpx)        0.259024
+xyzguess Q(cpx)      -0.0215925  range -1.000 1.000
+xyzguess f(cpx)       0.0648796
+xyzguess cr(cpx)     0.00643400
+xyzguess t(cpx)       0.0371582
+xyzguess k(cpx)       0.0131354
+xyzguess x(ilm)        0.885897
+xyzguess Q(ilm)        0.729197  range -0.990 0.990
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 9.6, T = 904, for: pl spn ol opx cpx ru  with pl = 0, ru = 0
+% --------------------------------------------------------
+ptguess 9.6 904
+% --------------------------------------------------------
+xyzguess ca(pl)        0.128963
+xyzguess k(pl)        0.0110659
+xyzguess x(sp)         0.188546
+xyzguess y(sp)        0.0208544
+xyzguess c(sp)       0.00341791
+xyzguess t(sp)        0.0336738
+xyzguess Q1(sp)        0.513010
+xyzguess Q2(sp)       0.0862843
+xyzguess Q3(sp)       0.0267072
+xyzguess x(ol)         0.135315
+xyzguess c(ol)      0.000952068
+xyzguess Q(ol)       8.14610e-5
+xyzguess x(opx)        0.127179
+xyzguess y(opx)        0.152790  range  0.000 2.000
+xyzguess c(opx)       0.0255006
+xyzguess Q(opx)      -0.0702327  range -1.000 1.000
+xyzguess f(opx)       0.0221926
+xyzguess t(opx)      0.00900284
+xyzguess cr(opx)     0.00519357
+xyzguess j(opx)      0.00882295
+xyzguess x(cpx)        0.128363
+xyzguess y(cpx)       0.0276345  range  0.000 2.000
+xyzguess o(cpx)        0.177454
+xyzguess n(cpx)        0.220863
+xyzguess Q(cpx)      -0.0290609  range -1.000 1.000
+xyzguess f(cpx)       0.0430195
+xyzguess cr(cpx)     0.00410638
+xyzguess t(cpx)       0.0292461
+xyzguess k(cpx)       0.0114544
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 21.3298, T = 1410.000, for: liq spn ol cpx - g
+% --------------------------------------------------------
+ptguess 21.3298 1410.000
+% --------------------------------------------------------
+xyzguess wo(L)            0.32590
+xyzguess sl(L)            0.15942
+xyzguess fo(L)            0.13504
+xyzguess fa(L)            0.05504
+xyzguess jd(L)            0.22792
+xyzguess hm(L)            0.05219
+xyzguess ek(L)            0.00081
+xyzguess ti(L)            0.02267
+xyzguess kj(L)            0.01882
+xyzguess yct(L)           0.01827
+xyzguess x(sp)            0.15138
+xyzguess y(sp)            0.04583
+xyzguess c(sp)            0.01209
+xyzguess t(sp)            0.00725
+xyzguess Q1(sp)           0.39332
+xyzguess Q2(sp)           0.07068
+xyzguess Q3(sp)           0.05379
+xyzguess x(g)             0.15263
+xyzguess c(g)             0.14685
+xyzguess f(g)             0.02543
+xyzguess cr(g)            0.01442
+xyzguess t(g)             0.01235
+xyzguess x(ol)            0.11185
+xyzguess c(ol)            0.00633
+xyzguess Q(ol)            0.00031
+xyzguess x(opx)           0.09984
+xyzguess y(opx)           0.22573
+xyzguess c(opx)           0.08719
+xyzguess Q(opx)          -0.04338
+xyzguess f(opx)           0.05899
+xyzguess t(opx)           0.00620
+xyzguess cr(opx)          0.00949
+xyzguess j(opx)           0.01607
+xyzguess x(cpx)           0.11048
+xyzguess y(cpx)           0.17934
+xyzguess o(cpx)           0.59500
+xyzguess n(cpx)           0.08319
+xyzguess Q(cpx)          -0.02657
+xyzguess f(cpx)           0.02928
+xyzguess cr(cpx)          0.00579
+xyzguess t(cpx)           0.02431
+xyzguess k(cpx)           0.00138
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 8.3, T = 985, for: pl spn ol opx cpx  with spn = 0
+% --------------------------------------------------------
+ptguess 8.3 985
+% --------------------------------------------------------
+xyzguess ca(pl)        0.549657
+xyzguess k(pl)        0.0128618
+xyzguess x(sp)         0.185382
+xyzguess y(sp)        0.0577488
+xyzguess c(sp)       0.00606025
+xyzguess t(sp)        0.0668115
+xyzguess Q1(sp)        0.459179
+xyzguess Q2(sp)       0.0667015
+xyzguess Q3(sp)       0.0539213
+xyzguess x(ol)         0.130345
+xyzguess c(ol)       0.00156078
+xyzguess Q(ol)      0.000120104
+xyzguess x(opx)        0.144890
+xyzguess y(opx)        0.246782  range  0.000 2.000
+xyzguess c(opx)        0.331022
+xyzguess Q(opx)      -0.0857893  range -1.000 1.000
+xyzguess f(opx)       0.0833205
+xyzguess t(opx)       0.0587720
+xyzguess cr(opx)      0.0129791
+xyzguess j(opx)       0.0269291
+xyzguess x(cpx)        0.126192
+xyzguess y(cpx)       0.0794549  range  0.000 2.000
+xyzguess o(cpx)        0.238848
+xyzguess n(cpx)        0.119166
+xyzguess Q(cpx)      -0.0371848  range -1.000 1.000
+xyzguess f(cpx)       0.0553736
+xyzguess cr(cpx)     0.00428121
+xyzguess t(cpx)       0.0214447
+xyzguess k(cpx)       0.0236466
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 2.1, T = 1187, for: liq pl ol opx cpx  with cpx = 0
+% --------------------------------------------------------
+ptguess 2.1 1187
+% --------------------------------------------------------
+xyzguess wo(L)         0.358851
+xyzguess sl(L)         0.167129
+xyzguess fo(L)        0.0946505
+xyzguess fa(L)        0.0345000
+xyzguess jd(L)         0.155196
+xyzguess hm(L)        0.0472162
+xyzguess ek(L)       0.00278222
+xyzguess ti(L)        0.0310695
+xyzguess kj(L)       0.00836015
+xyzguess yct(L)       0.0421708
+xyzguess ca(pl)        0.846969
+xyzguess k(pl)      0.000570821
+xyzguess x(ol)        0.0958100
+xyzguess c(ol)       0.00645887
+xyzguess Q(ol)      0.000322544
+xyzguess x(opx)       0.0984884
+xyzguess y(opx)        0.162153  range  0.000 2.000
+xyzguess c(opx)        0.218612
+xyzguess Q(opx)      -0.0502345  range -1.000 1.000
+xyzguess f(opx)       0.0451062
+xyzguess t(opx)       0.0198847
+xyzguess cr(opx)      0.0453622
+xyzguess j(opx)      0.00551421
+xyzguess x(cpx)       0.0866057
+xyzguess y(cpx)       0.0836872  range  0.000 2.000
+xyzguess o(cpx)        0.206101
+xyzguess n(cpx)       0.0301995
+xyzguess Q(cpx)      -0.0269968  range -1.000 1.000
+xyzguess f(cpx)       0.0341372
+xyzguess cr(cpx)      0.0222513
+xyzguess t(cpx)      0.00670171
+xyzguess k(cpx)      0.00162913
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 0.9, T = 1185, for: liq pl ol opx  with opx = 0
+% --------------------------------------------------------
+ptguess 0.9 1185
+% --------------------------------------------------------
+xyzguess wo(L)         0.356301
+xyzguess sl(L)         0.171127
+xyzguess fo(L)        0.0952017
+xyzguess fa(L)        0.0339830
+xyzguess jd(L)         0.144690
+xyzguess hm(L)        0.0469893
+xyzguess ek(L)       0.00655664
+xyzguess ti(L)        0.0300513
+xyzguess kj(L)       0.00762364
+xyzguess yct(L)       0.0432972
+xyzguess ca(pl)        0.863610
+xyzguess k(pl)      0.000486213
+xyzguess x(ol)        0.0923583
+xyzguess c(ol)       0.00626694
+xyzguess Q(ol)      0.000303267
+xyzguess x(opx)       0.0952580
+xyzguess y(opx)        0.194847  range  0.000 2.000
+xyzguess c(opx)        0.173856
+xyzguess Q(opx)      -0.0478284  range -1.000 1.000
+xyzguess f(opx)       0.0391230
+xyzguess t(opx)       0.0150462
+xyzguess cr(opx)      0.0915558
+xyzguess j(opx)      0.00442183
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 0.0, T = 1150, for: liq pl ol cpx
+% --------------------------------------------------------
+ptguess 0.0 1150
+% --------------------------------------------------------
+xyzguess wo(L)         0.335092
+xyzguess sl(L)         0.138638
+xyzguess fo(L)        0.0835434
+xyzguess fa(L)        0.0331702
+xyzguess jd(L)         0.166097
+xyzguess hm(L)        0.0595867
+xyzguess ek(L)       0.00592030
+xyzguess ti(L)        0.0393815
+xyzguess kj(L)       0.00982331
+xyzguess yct(L)       0.0396927
+xyzguess ca(pl)        0.817184
+xyzguess k(pl)      0.000720933
+xyzguess x(ol)         0.104489
+xyzguess c(ol)       0.00623529
+xyzguess Q(ol)      0.000345515
+xyzguess x(cpx)       0.0917336
+xyzguess y(cpx)       0.0866456  range  0.000 2.000
+xyzguess o(cpx)        0.173111
+xyzguess n(cpx)       0.0368704
+xyzguess Q(cpx)      -0.0265937  range -1.000 1.000
+xyzguess f(cpx)       0.0401431
+xyzguess cr(cpx)      0.0428357
+xyzguess t(cpx)      0.00586352
+xyzguess k(cpx)      0.00261899
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 1.0, T = 1140, for: liq plc ol opx cpx ru
+% --------------------------------------------------------
+ptguess 1.0 1140
+% --------------------------------------------------------
+xyzguess wo(L)         0.302904
+xyzguess sl(L)         0.122841
+xyzguess fo(L)        0.0775071
+xyzguess fa(L)        0.0340238
+xyzguess jd(L)         0.200494
+xyzguess hm(L)        0.0751836
+xyzguess ek(L)       0.00181458
+xyzguess ti(L)        0.0467612
+xyzguess kj(L)        0.0162001
+xyzguess yct(L)       0.0351042
+xyzguess ca(plc)       0.713532
+xyzguess k(plc)      0.00132960
+xyzguess x(ol)         0.118857
+xyzguess c(ol)       0.00558263
+xyzguess Q(ol)      0.000348750
+xyzguess x(opx)        0.118934
+xyzguess y(opx)        0.149027  range  0.000 2.000
+xyzguess c(opx)        0.156059
+xyzguess Q(opx)      -0.0601614  range -1.000 1.000
+xyzguess f(opx)       0.0600950
+xyzguess t(opx)       0.0182166
+xyzguess cr(opx)      0.0277978
+xyzguess j(opx)      0.00653087
+xyzguess x(cpx)        0.105194
+xyzguess y(cpx)       0.0650305  range  0.000 2.000
+xyzguess o(cpx)        0.196460
+xyzguess n(cpx)       0.0505867
+xyzguess Q(cpx)      -0.0304695  range -1.000 1.000
+xyzguess f(cpx)       0.0536378
+xyzguess cr(cpx)      0.0146335
+xyzguess t(cpx)      0.00877736
+xyzguess k(cpx)      0.00434559
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 1.5, T = 1203, for: liq plc ol opx  with opx = 0
+% --------------------------------------------------------
+ptguess 1.5 1203
+% --------------------------------------------------------
+xyzguess wo(L)         0.357231
+xyzguess sl(L)         0.187696
+xyzguess fo(L)         0.101222
+xyzguess fa(L)        0.0343124
+xyzguess jd(L)         0.136912
+xyzguess hm(L)        0.0429140
+xyzguess ek(L)       0.00598800
+xyzguess ti(L)        0.0274450
+xyzguess kj(L)       0.00698097
+xyzguess yct(L)       0.0438545
+xyzguess ca(plc)       0.851470
+xyzguess k(plc)     0.000411357
+xyzguess x(ol)        0.0875370
+xyzguess c(ol)       0.00597571
+xyzguess Q(ol)      0.000272012
+xyzguess x(opx)       0.0865545
+xyzguess y(opx)        0.184018  range  0.000 2.000
+xyzguess c(opx)       0.0999629
+xyzguess Q(opx)      -0.0414576  range -1.000 1.000
+xyzguess f(opx)       0.0339468
+xyzguess t(opx)       0.0105472
+xyzguess cr(opx)      0.0755449
+xyzguess j(opx)      0.00257733
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 2.0, T = 1189, for: liq plc ol opx cpx  with cpx = 0
+% --------------------------------------------------------
+ptguess 2.0 1189
+% --------------------------------------------------------
+xyzguess wo(L)         0.362051
+xyzguess sl(L)         0.166726
+xyzguess fo(L)        0.0951752
+xyzguess fa(L)        0.0346108
+xyzguess jd(L)         0.151162
+xyzguess hm(L)        0.0474968
+xyzguess ek(L)       0.00327108
+xyzguess ti(L)        0.0312935
+xyzguess kj(L)       0.00822637
+xyzguess yct(L)       0.0415530
+xyzguess ca(plc)       0.825409
+xyzguess k(plc)     0.000519933
+xyzguess x(ol)        0.0951053
+xyzguess c(ol)       0.00657469
+xyzguess Q(ol)      0.000325674
+xyzguess x(opx)       0.0950993
+xyzguess y(opx)        0.154983  range  0.000 2.000
+xyzguess c(opx)        0.155890
+xyzguess Q(opx)      -0.0471880  range -1.000 1.000
+xyzguess f(opx)       0.0403571
+xyzguess t(opx)       0.0144777
+xyzguess cr(opx)      0.0470811
+xyzguess j(opx)      0.00408108
+xyzguess x(cpx)       0.0857373
+xyzguess y(cpx)       0.0851841  range  0.000 2.000
+xyzguess o(cpx)        0.202448
+xyzguess n(cpx)       0.0296651
+xyzguess Q(cpx)      -0.0265707  range -1.000 1.000
+xyzguess f(cpx)       0.0338061
+xyzguess cr(cpx)      0.0255669
+xyzguess t(cpx)      0.00640471
+xyzguess k(cpx)      0.00163964
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 10.8, T = 1148, for: liq pl plc ol opx cpx  with pl = 0
+% --------------------------------------------------------
+ptguess 10.8 1148
+% --------------------------------------------------------
+xyzguess wo(L)         0.211395
+xyzguess sl(L)         0.122897
+xyzguess fo(L)        0.0639635
+xyzguess fa(L)        0.0267815
+xyzguess jd(L)         0.433325
+xyzguess hm(L)        0.0341289
+xyzguess ek(L)      0.000276978
+xyzguess ti(L)        0.0237777
+xyzguess kj(L)        0.0826359
+xyzguess yct(L)       0.0458440
+xyzguess ca(pl)        0.430735
+xyzguess k(pl)       0.00968522
+xyzguess ca(plc)       0.556974
+xyzguess k(plc)      0.00548987
+xyzguess x(ol)         0.130824
+xyzguess c(ol)       0.00360030
+xyzguess Q(ol)      0.000242742
+xyzguess x(opx)        0.128856
+xyzguess y(opx)        0.301031  range  0.000 2.000
+xyzguess c(opx)       0.0495067
+xyzguess Q(opx)      -0.0620373  range -1.000 1.000
+xyzguess f(opx)       0.0526377
+xyzguess t(opx)       0.0154169
+xyzguess cr(opx)     0.00916954
+xyzguess j(opx)       0.0139100
+xyzguess x(cpx)        0.141609
+xyzguess y(cpx)        0.199886  range  0.000 2.000
+xyzguess o(cpx)        0.371316
+xyzguess n(cpx)        0.147441
+xyzguess Q(cpx)      -0.0387731  range -1.000 1.000
+xyzguess f(cpx)       0.0462676
+xyzguess cr(cpx)     0.00582500
+xyzguess t(cpx)       0.0360736
+xyzguess k(cpx)      0.00955894
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 8.5, T = 1213, for: liq plc spn ol opx cpx  with plc = 0, spn = 0
+% --------------------------------------------------------
+ptguess 8.5 1213
+% --------------------------------------------------------
+xyzguess wo(L)         0.324536
+xyzguess sl(L)         0.190743
+xyzguess fo(L)        0.0952496
+xyzguess fa(L)        0.0386499
+xyzguess jd(L)         0.253538
+xyzguess hm(L)        0.0357781
+xyzguess ek(L)      0.000485858
+xyzguess ti(L)        0.0324059
+xyzguess kj(L)        0.0137739
+xyzguess yct(L)       0.0523017
+xyzguess ca(plc)       0.764883
+xyzguess k(plc)     0.000757765
+xyzguess x(sp)         0.147599
+xyzguess y(sp)        0.0287331
+xyzguess c(sp)       0.00750370
+xyzguess t(sp)        0.0497428
+xyzguess Q1(sp)        0.445360
+xyzguess Q2(sp)       0.0712412
+xyzguess Q3(sp)       0.0383030
+xyzguess x(ol)         0.112612
+xyzguess c(ol)       0.00571176
+xyzguess Q(ol)      0.000322604
+xyzguess x(opx)        0.108715
+xyzguess y(opx)        0.226755  range  0.000 2.000
+xyzguess c(opx)       0.0798186
+xyzguess Q(opx)      -0.0512850  range -1.000 1.000
+xyzguess f(opx)       0.0404943
+xyzguess t(opx)       0.0174760
+xyzguess cr(opx)     0.00994088
+xyzguess j(opx)      0.00596282
+xyzguess x(cpx)        0.111457
+xyzguess y(cpx)        0.162327  range  0.000 2.000
+xyzguess o(cpx)        0.289382
+xyzguess n(cpx)       0.0569131
+xyzguess Q(cpx)      -0.0357920  range -1.000 1.000
+xyzguess f(cpx)       0.0351348
+xyzguess cr(cpx)     0.00646451
+xyzguess t(cpx)       0.0182636
+xyzguess k(cpx)      0.00159773
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+% at P = 8.3, T = 1190, for: liq plc spn ol opx cpx  with spn = 0
+% --------------------------------------------------------
+ptguess 8.3 1190
+% --------------------------------------------------------
+xyzguess wo(L)         0.290186
+xyzguess sl(L)         0.161782
+xyzguess fo(L)        0.0845999
+xyzguess fa(L)        0.0366545
+xyzguess jd(L)         0.304434
+xyzguess hm(L)        0.0437230
+xyzguess ek(L)      0.000493135
+xyzguess ti(L)        0.0414915
+xyzguess kj(L)        0.0216871
+xyzguess yct(L)       0.0473248
+xyzguess ca(plc)       0.693059
+xyzguess k(plc)      0.00134803
+xyzguess x(sp)         0.168888
+xyzguess y(sp)        0.0524328
+xyzguess c(sp)       0.00720832
+xyzguess t(sp)         0.151334
+xyzguess Q1(sp)        0.423524
+xyzguess Q2(sp)       0.0593089
+xyzguess Q3(sp)       0.0577464
+xyzguess x(ol)         0.123199
+xyzguess c(ol)       0.00516096
+xyzguess Q(ol)      0.000320172
+xyzguess x(opx)        0.119322
+xyzguess y(opx)        0.231873  range  0.000 2.000
+xyzguess c(opx)       0.0831418
+xyzguess Q(opx)      -0.0570180  range -1.000 1.000
+xyzguess f(opx)       0.0501178
+xyzguess t(opx)       0.0215674
+xyzguess cr(opx)      0.0108108
+xyzguess j(opx)      0.00831488
+xyzguess x(cpx)        0.123002
+xyzguess y(cpx)        0.155326  range  0.000 2.000
+xyzguess o(cpx)        0.312585
+xyzguess n(cpx)       0.0795987
+xyzguess Q(cpx)      -0.0375542  range -1.000 1.000
+xyzguess f(cpx)       0.0424316
+xyzguess cr(cpx)     0.00669600
+xyzguess t(cpx)       0.0265263
+xyzguess k(cpx)      0.00281195
+% --------------------------------------------------------
