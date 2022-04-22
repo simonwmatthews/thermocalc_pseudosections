@@ -1,0 +1,18 @@
+setpagewidth 170  % for Mac; 80 on a PC
+dontwrap no      %
+
+all-in-one no
+
+
+% scriptfile 63     % this is the datafile with everything in it
+nooutsuffix yes
+
+scriptfile klb1
+
+dataset 633
+calcmode 1
+newmessages no
+strictsyntax no
+
+monitorheap no
+*
